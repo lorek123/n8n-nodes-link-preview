@@ -51,7 +51,7 @@
     "gulp-replace": "^1.1.4",
     "gulp-svg-sprite": "^2.0.3",
     "gulp-svgmin": "^4.1.0",
-    "n8n-core": "~0.125.0",
+    "n8n-core": "~1.98.0",
     "n8n-workflow": "~0.107.0",
     "prettier": "^2.7.1",
     "typescript": "~4.8.4"
