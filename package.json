@@ -14,8 +14,8 @@
   "license": "MIT",
   "homepage": "https://github.com/lorek123/n8n-nodes-link-preview",
   "author": {
-    "name": "Artur Lorenz",
-    "email": "lorek123@gmail.com"
+    "name": "lorek123",
+    "email": "lorek123@users.noreply.github.com"
   },
   "repository": {
     "type": "git",
@@ -76,5 +76,8 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
