@@ -1,9 +1,11 @@
-import { IExecuteFunctions } from 'n8n-core';
+import { getExecuteFunctions } from 'n8n-core';
 import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
 	IDataObject,
+	NodeConnectionType,
+	IExecuteFunctions,
 } from 'n8n-workflow';
 import { getLinkPreview } from 'link-preview-js';
 import createDOMPurify from 'dompurify';
@@ -90,15 +92,15 @@ export class LinkPreview implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Link Preview',
 		name: 'linkPreview',
-		icon: 'file:link.svg',
+		icon: 'file:icons/link.svg',
 		group: ['transform'],
 		version: 1,
 		description: 'Get preview information from a URL',
 		defaults: {
 			name: 'Link Preview',
 		},
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [NodeConnectionType.Main],
+		outputs: [NodeConnectionType.Main],
 		properties: [
 			{
 				displayName: 'URL',
