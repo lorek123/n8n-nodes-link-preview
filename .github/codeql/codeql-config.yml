@@ -1,0 +1,38 @@
+name: "CodeQL Config"
+
+queries:
+  # Use these queries for security analysis
+  - uses: security-extended
+  # Use these queries for additional analysis
+  - uses: security-and-quality
+
+paths:
+  - src
+  - nodes
+  - dist
+
+paths-ignore:
+  - '**/node_modules'
+  - '**/dist'
+  - '**/test'
+  - '**/tests'
+  - '**/__tests__'
+
+query-filters:
+  - include:
+      tags:
+        - security
+        - external/cwe/cwe-79  # XSS
+        - external/cwe/cwe-89   # SQL Injection
+        - external/cwe/cwe-352  # CSRF
+        - external/cwe/cwe-601  # Open Redirect
+        - external/cwe/cwe-611  # XXE
+        - external/cwe/cwe-78   # Command Injection
+        - external/cwe/cwe-20   # Improper Input Validation
+        - external/cwe/cwe-22   # Path Traversal
+        - external/cwe/cwe-287  # Improper Authentication
+        - external/cwe/cwe-798  # Hard-coded Credentials
+        - external/cwe/cwe-326  # Weak Encryption
+        - external/cwe/cwe-502  # Deserialization of Untrusted Data
+        - external/cwe/cwe-918  # SSRF
+        - external/cwe/cwe-400  # Resource Exhaustion
