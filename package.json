@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-link-preview",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "n8n node for getting link previews with HTML sanitization and rich text support",
   "keywords": [
     "n8n-community-node-package",

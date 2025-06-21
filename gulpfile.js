@@ -26,8 +26,30 @@ gulp.task('clean:svg', function() {
 		.pipe(gulp.dest('dist'));
 });
 
+// Copy individual SVG icons to nodes directory
+gulp.task('copy:icons', function() {
+	return gulp.src('nodes/**/*.svg')
+		.pipe(svgmin({
+			plugins: [
+				{
+					name: 'removeViewBox',
+					active: false
+				}
+			]
+		}))
+		.pipe(cheerio({
+			run: function($) {
+				$('[fill]').removeAttr('fill');
+				$('[stroke]').removeAttr('stroke');
+			},
+			parserOptions: { xmlMode: true }
+		}))
+		.pipe(replace('&gt;', '>'))
+		.pipe(gulp.dest('dist/nodes'));
+});
+
 // Build SVG sprite
-gulp.task('build:icons', gulp.series('clean:svg', function() {
+gulp.task('build:icons', gulp.series('clean:svg', 'copy:icons', function() {
 	return gulp.src('nodes/**/*.svg')
 		.pipe(svgSprite({
 			mode: {

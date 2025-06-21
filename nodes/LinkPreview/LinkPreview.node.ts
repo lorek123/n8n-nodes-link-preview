@@ -91,7 +91,7 @@ export class LinkPreview implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Link Preview',
 		name: 'linkPreview',
-		icon: 'file:icons/link.svg',
+		icon: 'file:link.svg',
 		group: ['transform'],
 		version: 1,
 		description: 'Get preview information from a URL',
