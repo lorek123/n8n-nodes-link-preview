@@ -1,18 +1,17 @@
-import { getExecuteFunctions } from 'n8n-core';
 import {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
 	IDataObject,
-	NodeConnectionType,
 	IExecuteFunctions,
+	NodeOperationError,
+	NodeConnectionType,
+	INodeInputConfiguration,
+	INodeOutputConfiguration,
 } from 'n8n-workflow';
 import { getLinkPreview } from 'link-preview-js';
 import createDOMPurify from 'dompurify';
 import { JSDOM } from 'jsdom';
-
-// URL validation regex
-const URL_REGEX = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
 
 // Initialize DOMPurify
 const window = new JSDOM('').window;
@@ -38,7 +37,7 @@ interface LinkPreviewOptions {
 }
 
 // Normalize URL by adding protocol if missing and handling special characters
-function normalizeURL(url: string): string {
+function normalizeURL(this: IExecuteFunctions, url: string): string {
 	try {
 		// Add https:// if no protocol is specified
 		if (!url.startsWith('http://') && !url.startsWith('https://')) {
@@ -54,8 +53,8 @@ function normalizeURL(url: string): string {
 		}
 		
 		return urlObj.toString();
-	} catch (error) {
-		throw new Error('Invalid URL format');
+	} catch {
+		throw new NodeOperationError(this.getNode(), 'Invalid URL format');
 	}
 }
 
@@ -99,8 +98,8 @@ export class LinkPreview implements INodeType {
 		defaults: {
 			name: 'Link Preview',
 		},
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: ['main'] as unknown as (NodeConnectionType | INodeInputConfiguration)[],
+		outputs: ['main'] as unknown as (NodeConnectionType | INodeOutputConfiguration)[],
 		properties: [
 			{
 				displayName: 'URL',
@@ -119,7 +118,7 @@ export class LinkPreview implements INodeType {
 				default: {},
 				options: [
 					{
-						displayName: 'Timeout (seconds)',
+						displayName: 'Timeout (Seconds)',
 						name: 'timeout',
 						type: 'number',
 						default: 10,
@@ -150,8 +149,7 @@ export class LinkPreview implements INodeType {
 
 			try {
 				// Normalize and validate URL
-				const normalizedUrl = normalizeURL(url);
-				
+				const normalizedUrl = normalizeURL.call(this, url);
 				// Configure link preview options
 				const previewOptions: LinkPreviewOptions = {
 					timeout: (options.timeout || 10) * 1000, // Convert to milliseconds
@@ -173,17 +171,17 @@ export class LinkPreview implements INodeType {
 				returnData.push({
 					json: sanitizedPreview,
 				});
-			} catch (error: any) {
+			} catch {
 				if (this.continueOnFail()) {
 					returnData.push({
 						json: {
-							error: error.message || 'Unknown error occurred',
+							error: 'Unknown error occurred',
 							url,
 						},
 					});
 					continue;
 				}
-				throw error;
+				throw new NodeOperationError(this.getNode(), 'Unknown error occurred');
 			}
 		}
 
