@@ -54,7 +54,7 @@
     "gulp-svg-sprite": "^2.0.3",
     "gulp-svgmin": "^4.1.0",
     "jsonc-eslint-parser": "^2.4.0",
-    "n8n-core": "~1.14.1",
+    "n8n-core": "~1.103.0",
     "n8n-workflow": "~1.82.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
