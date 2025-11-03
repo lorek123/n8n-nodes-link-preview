@@ -42,10 +42,10 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
-    "@types/jsdom": "^21.1.7",
+    "@types/jsdom": "^27.0.0",
     "@types/request-promise-native": "~1.0.18",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
-    "@typescript-eslint/parser": "~8.34.1",
+    "@typescript-eslint/parser": "~8.46.2",
     "eslint": "^9.0.0",
     "eslint-plugin-n8n-nodes-base": "^1.11.0",
     "gulp": "^5.0.1",
@@ -54,15 +54,15 @@
     "gulp-svg-sprite": "^2.0.3",
     "gulp-svgmin": "^4.1.0",
     "jsonc-eslint-parser": "^2.4.0",
-    "n8n-core": "~1.14.1",
-    "n8n-workflow": "~1.82.0",
+    "n8n-core": "~1.117.0",
+    "n8n-workflow": "~1.115.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
-    "typescript": "~5.8.3"
+    "typescript": "~5.9.3"
   },
   "dependencies": {
     "dompurify": "^3.2.6",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.1.0",
     "link-preview-js": "^3.1.0"
   },
   "engines": {
